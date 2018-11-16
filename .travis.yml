@@ -1,0 +1,24 @@
+sudo: required
+dist: debian
+language: php
+
+php:
+  - 7.1
+
+branches:
+  only:
+    - master #-> QA/Staging Server
+    - develop #-> DevServer
+
+# Instakk Environment
+before_install:
+  #- curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
+  - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(cur -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  - chmod +x ./kubectl
+  - sudo mv ./kubectl /usr/local/bin/kubectl
+
+# Precompiler
+before_script:
+
+# Main Execution
+script:
